@@ -1,0 +1,23 @@
+const express = require("express")
+const app = express()
+const dbConnect = require("./config/database")
+require("dotenv").config()
+
+const PORT = process.env.PORT || 4000
+
+app.use(express.json())
+
+const todoRoutes = require("./routes/todos") 
+
+app.use("/api/v1", todoRoutes)
+
+app.get("/",(req,res)=>{
+    res.send("This is Home Page Baby")
+})
+
+app.listen(PORT,()=>{
+    console.log(`Port Started Running at ${PORT}`)
+})
+
+dbConnect()
+
